@@ -12,21 +12,21 @@ def randString(size=1, chars=string.ascii_uppercase + string.digits):
 	return ''.join(random.choice(chars) for x in range(size))
 
 def main():
-	# Number of changes to make in process
-	changes = 500
+	# Number of glitches to make in process
+	glitches = 500
 	# Position in text to start glitching
-	minPos = 150
+	startPos = 150
 	# Number of characters to change at a time
-	changeSize = 150
+	glitchSize = 150
 
-	# Accept optional arguments from commandline (changes, changeSize, and minPos)
+	# Accept optional arguments from commandline (glitches, glitchSize, and startPos)
 	if len(sys.argv) >= 3:
-		changes = int(sys.argv[2])
+		glitches = int(sys.argv[2])
 	if len(sys.argv) >= 4:
-		changeSize = int(sys.argv[3])
-		changeSize = min(changeSize, 2)
+		glitchSize = int(sys.argv[3])
+		glitchSize = min(glitchSize, 2)
 	if len(sys.argv) >= 5:
-		minPos = int(sys.argv[4])
+		startPos = int(sys.argv[4])
 
 	# Extract filename and file extension from commandline argument
 	fileName, fileExtension = os.path.splitext(sys.argv[1])
@@ -54,15 +54,15 @@ def main():
 	textList = list(text)
 
 	# Ensure that there are enough characters
-	if characterCount > minPos:
+	if characterCount > startPos:
 		# Modify the file the specified number of times
-		for i in range(changes):
+		for i in range(glitches):
 			# Select a random position to modify the file
-			position = random.randrange(minPos, characterCount - 1)
+			position = random.randrange(startPos, characterCount - 1)
 			# Select a random size to modify (how many characters)
 			# Confines size to within the existing characters, as to
 			# not change file size which causes corruption.
-			size = random.randrange(1, min(changeSize, characterCount - position))
+			size = random.randrange(1, min(glitchSize, characterCount - position))
 			# Generate random characters for replacement
 			newCharacters = randString(size)
 			# Replace characters in location
