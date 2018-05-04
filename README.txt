@@ -7,7 +7,7 @@ do not need to worry about corrupting your original version.
 
 Instructions:
 - Navigate to directory containing DataMosh (use CD command) in terminal
-- Type command: python DataMosh.py <FileToGlitch> <Glitches> <GlitchSize> <StartPos>
+- Type command: python DataMosh.py <FileToGlitch> <GlitchAmount> <GlitchSize> <StartPos>
   = Example: python DataMosh.py OriginalVideo.MOV 6000 200 100
 
 <FileToGlitch> should be the filepath to the file you want to glitch,
@@ -15,7 +15,7 @@ including extensions.
  - NOTE: DataMosh is currently sensitive to filenames that include spaces
    and parenthesis in the current version.
 
-<Glitches> refers to the number of glitches you want to be made to the file,
+<GlitchAmount> refers to the number of glitches you want to be made to the file,
 the more glitches the "glitchier" the outcome. The default value is 500.
 
 <GlitchSize> refers to the amount of data to modify each "glitch".
