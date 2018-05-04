@@ -1,10 +1,3 @@
-'''
-DataMosh v1.0.0
-
-Developed by Owen Davis-Bower
-OwenDavisBower.com
-'''
-
 import string, random, sys, os, shutil
 
 # Generate a random string of characters
@@ -12,21 +5,19 @@ def randString(size=1, chars=string.ascii_uppercase + string.digits):
 	return ''.join(random.choice(chars) for x in range(size))
 
 def main():
-	# Number of glitches to make in process
-	glitchAmount = 500
+	# Number of changes to make in process
+	changes = 500
 	# Position in text to start glitching
-	startPos = 150
+	minPos = 10000
 	# Number of characters to change at a time
-	glitchSize = 150
+	changeSize = 150
 
-	# Accept optional arguments from commandline (glitchAmount, glitchSize, and startPos)
+	# Accept optional arguments from commandline
 	if len(sys.argv) >= 3:
-		glitchAmount = int(sys.argv[2])
+		changes = int(sys.argv[2])
 	if len(sys.argv) >= 4:
-		glitchSize = int(sys.argv[3])
-		glitchSize = min(glitchSize, 2)
-	if len(sys.argv) >= 5:
-		startPos = int(sys.argv[4])
+		changeSize = int(sys.argv[3])
+		changeSize = min(changeSize, 2)
 
 	# Extract filename and file extension from commandline argument
 	fileName, fileExtension = os.path.splitext(sys.argv[1])
@@ -54,15 +45,15 @@ def main():
 	textList = list(text)
 
 	# Ensure that there are enough characters
-	if characterCount > startPos:
+	if characterCount > minPos:
 		# Modify the file the specified number of times
-		for i in range(glitchAmount):
+		for i in range(changes):
 			# Select a random position to modify the file
-			position = random.randrange(startPos, characterCount - 1)
+			position = random.randrange(minPos, characterCount - 1)
 			# Select a random size to modify (how many characters)
 			# Confines size to within the existing characters, as to
 			# not change file size which causes corruption.
-			size = random.randrange(1, min(glitchSize, characterCount - position))
+			size = random.randrange(1, min(changeSize, characterCount - position))
 			# Generate random characters for replacement
 			newCharacters = randString(size)
 			# Replace characters in location
@@ -77,7 +68,7 @@ def main():
 	writeFile.close()
 
 	# Print informational message upon completion
-	print("Wrote to: " + newFileName + fileExtension)
+	print("Wrote to: " + newFileName + '.MOV')
 
 if __name__ == "__main__":
 	main()
