@@ -14,24 +14,34 @@ def randString(size=1, chars=string.ascii_uppercase + string.digits):
 def main():
 	# Number of glitches to make in process
 	glitchAmount = 500
-	# Position in text to start glitching
-	startPos = 150
-	# Number of characters to change at a time
+	# Number of characters to change each glitch
 	glitchSize = 150
+	# Position in text to start glitching
+	startPos = 500
+	# Choose whether to copy characters or use random characters
+	copy = True
 
 	# Accept optional arguments from commandline (glitchAmount, glitchSize, and startPos)
+	
 	if len(sys.argv) >= 3:
-		glitchAmount = int(sys.argv[2])
-	if len(sys.argv) >= 4:
-		glitchSize = int(sys.argv[3])
-		glitchSize = min(glitchSize, 2)
-	if len(sys.argv) >= 5:
-		startPos = int(sys.argv[4])
+		if sys.argv[2] != '_':
+			glitchAmount = int(sys.argv[2])
+
+		if len(sys.argv) >= 4:
+			if sys.argv[3] != '_':
+				glitchSize = int(sys.argv[3])
+				# Prevent error from occuring with glitchSize 1
+				glitchSize = max(glitchSize, 2)
+
+			if len(sys.argv) >= 5:
+				if sys.argv[4] != '_':
+					startPos = int(sys.argv[4])
 
 	# Extract filename and file extension from commandline argument
 	fileName, fileExtension = os.path.splitext(sys.argv[1])
-	# Print informational message at start
+	# Print informational messages at start
 	print("Glitching " + fileName + fileExtension)
+	print("Amount: " + str(glitchAmount) + ", Size: " + str(glitchSize) + ", Starting Point: " + str(startPos))
 	# Generate a new file name to save glitched file to
 	newFileName = fileName + '_Glitched'
 
@@ -63,9 +73,16 @@ def main():
 			# Confines size to within the existing characters, as to
 			# not change file size which causes corruption.
 			size = random.randrange(1, min(glitchSize, characterCount - position))
-			# Generate random characters for replacement
-			newCharacters = randString(size)
-			# Replace characters in location
+			# Read whether to copy from data or generate new characters
+			if copy:
+				# Select a random position to copy from
+				copyPosition = random.randrange(startPos, characterCount - 1)
+				# Copy characters from copy position
+				newCharacters = textList[copyPosition:copyPosition +  size]
+			else:
+				# Generate random characters for replacement
+				newCharacters = randString(size)
+			# Replace characters in location, this is what causes the glitches
 			textList[position:position + size] = newCharacters;
 
 	# Convert list back to text file
@@ -77,7 +94,7 @@ def main():
 	writeFile.close()
 
 	# Print informational message upon completion
-	print("Wrote to: " + newFileName + fileExtension)
+	print("Saved to: " + newFileName + fileExtension)
 
 if __name__ == "__main__":
 	main()

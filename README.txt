@@ -9,6 +9,8 @@ Instructions:
 - Navigate to directory containing DataMosh (use CD command) in terminal
 - Type command: python DataMosh.py <FileToGlitch> <GlitchAmount> <GlitchSize> <StartPos>
   = Example: python DataMosh.py OriginalVideo.MOV 6000 200 100
+  = Note: You can use '_'s to leave a parameter default
+  	- Example: python DataMosh.py OriginalVideo.MOV _ _ 100
 
 <FileToGlitch> should be the filepath to the file you want to glitch,
 including extensions.
