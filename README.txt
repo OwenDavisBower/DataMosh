@@ -5,6 +5,8 @@ DataMosh modifies raw file data in order to create "glitchy" effects.
 The program will generate the glitched version in a new file, so you
 do not need to worry about corrupting your original version.
 
+See example of datamoshing at: http://owendavisbower.com/datamosh.html
+
 Instructions:
 - Navigate to directory containing DataMosh (use CD command) in terminal
 - Type command: python DataMosh.py <FileToGlitch> <GlitchAmount> <GlitchSize> <StartPos>
