@@ -26,3 +26,5 @@ The default value is 150.
 <StartPos> refers to the minimum position in the data to begin glitching from.
 The default value is 150.
  - WARNING: Low starting positions may breach header data, making files unreadable.
+
+ * Sample video to test the program: http://bit.ly/2IwhRwM *
